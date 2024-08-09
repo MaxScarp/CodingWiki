@@ -20,5 +20,7 @@ namespace CodingWiki.Model.Models
 		{
 			get => $"{FirstName} {LastName}";
 		}
-	}
+
+        public List<BookAuthorMap> BookAuthorMapList { get; set; }
+    }
 }

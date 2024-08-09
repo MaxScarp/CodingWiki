@@ -14,6 +14,14 @@ namespace CodingWiki.Model.Models
 		public decimal Price { get; set; }
 
 		[NotMapped]
-        public string PriceRange { get; set; }
-    }
+		public string PriceRange { get; set; }
+
+		public BookDetail BookDetail { get; set; }
+
+		[ForeignKey(nameof(Publisher))]
+		public int PublshiderId { get; set; }
+		public Publisher Publisher { get; set; }
+
+		public List<BookAuthorMap> BookAuthorMapList { get; set; }
+	}
 }
