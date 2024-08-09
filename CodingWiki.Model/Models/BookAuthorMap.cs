@@ -2,6 +2,7 @@
 
 namespace CodingWiki.Model.Models
 {
+	[Table("BookAuthorMap")]
 	public class BookAuthorMap
 	{
 		[ForeignKey(nameof(Book))]

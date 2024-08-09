@@ -1,4 +1,5 @@
-﻿using CodingWiki.Model.Models;
+﻿using CodingWiki.DataAccess.FluentConfig;
+using CodingWiki.Model.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodingWiki.DataAccess.Data
@@ -11,6 +12,17 @@ namespace CodingWiki.DataAccess.Data
 		public DbSet<Publisher> PublisherTable { get; set; }
 		public DbSet<SubCategory> SubCategoryTable { get; set; }
 		public DbSet<BookDetail> BookDetailTable { get; set; }
+		public DbSet<BookAuthorMap> BookAuthorMapTable { get; set; }
+
+		#region FLUENT API
+
+		public DbSet<FluentBookDetail> FluentBookDetailTable { get; set; }
+		public DbSet<FluentBook> FluentBookTable { get; set; }
+		public DbSet<FluentAuthor> FluentAuthorTable { get; set; }
+		public DbSet<FluentPublisher> FluentPublisherTable { get; set; }
+		public DbSet<FluentBookAuthorMap> FluentBookAuthorMapTable { get; set; }
+
+		#endregion
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -42,6 +54,16 @@ namespace CodingWiki.DataAccess.Data
 				new Publisher { PublisherId = 2, Name = "Pub 2 John", Location = "New York" },
 				new Publisher { PublisherId = 3, Name = "Pub 3 Ben", Location = "Hawaii" }
 				);
+
+			#region FLUENT API
+
+			modelBuilder.ApplyConfiguration(new FluentBookConfig());
+			modelBuilder.ApplyConfiguration(new FluentBookDetailConfig());
+			modelBuilder.ApplyConfiguration(new FluentPublisherConfig());
+			modelBuilder.ApplyConfiguration(new FluentAuthorConfig());
+			modelBuilder.ApplyConfiguration(new FluentBookAuthorMapConfig());
+
+			#endregion
 		}
 	}
 }
