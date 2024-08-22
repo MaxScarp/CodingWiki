@@ -1,7 +1,6 @@
 ﻿using CodingWiki.DataAccess.FluentConfig;
 using CodingWiki.Model.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace CodingWiki.DataAccess.Data
 {
@@ -25,10 +24,15 @@ namespace CodingWiki.DataAccess.Data
 
 		#endregion
 
+		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+		{
+
+		}
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer("Server=sqldev;Database=CodingWiki;Trusted_Connection=True;TrustServerCertificate=True")
-				.LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information);
+			//optionsBuilder.UseSqlServer("Server=sqldev;Database=CodingWiki;Trusted_Connection=True;TrustServerCertificate=True")
+			//	.LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information);
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -55,6 +59,12 @@ namespace CodingWiki.DataAccess.Data
 				new Publisher { PublisherId = 1, Name = "Pub 1 Jimmy", Location = "Chicago" },
 				new Publisher { PublisherId = 2, Name = "Pub 2 John", Location = "New York" },
 				new Publisher { PublisherId = 3, Name = "Pub 3 Ben", Location = "Hawaii" }
+				);
+
+			modelBuilder.Entity<Category>().HasData(
+				new Category { IdCategory = 1, Name = "Cat 1" },
+				new Category { IdCategory = 2, Name = "Cat 2" },
+				new Category { IdCategory = 3, Name = "Cat 3" }
 				);
 
 			#region FLUENT API
