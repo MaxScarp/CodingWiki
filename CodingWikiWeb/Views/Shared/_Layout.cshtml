@@ -55,6 +55,19 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.0/jquery-ui.min.js" integrity="sha512-MlEyuwT6VkRXExjj8CdBKNgd+e2H+aYZOCUaCrt9KRk6MlZDOs91V1yK22rwm8aCIsb5Ec1euL8f0g58RKT/Pg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.7.0/globalize.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.7.0/globalize/number.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.7.0/globalize/currency.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.7.0/globalize/date.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate-globalize/1.0.2/jquery.validate.globalize.min.js"></script>
+
+    <script>
+        Globalize.culture("it-IT"); // Imposta la cultura a 'it-IT'
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) || Globalize.parseFloat(value) !== NaN;
+        };
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
